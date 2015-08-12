@@ -16,14 +16,6 @@ ActiveRecord::Schema.define(version: 20150811040653) do
 # Could not dump table "albums" because of following NoMethodError
 #   undefined method `[]' for nil:NilClass
 
-  create_table "images", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "width"
-    t.integer  "height"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "pictures", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "album_id"
@@ -33,17 +25,6 @@ ActiveRecord::Schema.define(version: 20150811040653) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-  end
-
-  create_table "posts", force: :cascade do |t|
-    t.string   "title"
-    t.string   "body"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
   end
 
   create_table "tags", force: :cascade do |t|
