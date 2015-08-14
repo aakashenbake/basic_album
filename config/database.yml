@@ -6,14 +6,14 @@
 #   gem 'sqlite3'
 #
 #un comment below for localserver
-#default: &default
-#  adapter: sqlite3
-#  pool: 5
-#  timeout: 5000
+default: &default
+  adapter: sqlite3
+  pool: 5
+  timeout: 5000
 
-#development:
-#  <<: *default
-#  database: db/11111A.sqlite3
+development:
+  <<: *default
+  database: db/11111A.sqlite3
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -24,10 +24,9 @@
 
 
 #un comment below for heroku server
-#development:
 production:
   adapter: postgresql
   pool: 5
   timeout: 5000
   username: postgres
-  password:
+  password: 

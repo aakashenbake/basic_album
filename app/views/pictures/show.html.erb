@@ -1,8 +1,7 @@
-<br>
-
-
-
-<%= link_to 'List', album_picture_path %>
 <%= link_to 'Edit', edit_album_picture_path%>
-<%= link_to 'Back', album_pictures_path %>
-<%= link_to image_tag(@picture.image.url(:original)), '#' %>
+<%= link_to 'Back', album_path(@picture.album_id) %>
+<br>
+<%=image_tag(@picture.image.url(:original))%>
+<br>
+<%= link_to 'Edit', edit_album_picture_path%>
+<%= link_to 'Back', album_path(@picture.album_id) %>

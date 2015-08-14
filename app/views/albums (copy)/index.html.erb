@@ -1,12 +1,12 @@
+<br>
+<%= link_to 'Album creation', new_album_path %>
+<br>
 <h1>Listing albums</h1>
- <%= link_to 'Album creation', new_album_path %>
+ 
 <table border = "1">
   <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Show</th>
-    <th>Edit</th>
-    <th>Destroy</th>
+    <th>name</th>
+    <th>description</th>
   </tr>
  
   <% @albums.each do |album| %>

@@ -1,17 +1,14 @@
 class AlbumsController < ApplicationController
   def index
-  	@albums = Album.where(:user_id => current_user.id).order(:title)
-
+  	@albums = Album.where(:user_id => current_user.id)
   end
 
   def show
   	@album = Album.find(params[:id])
-    @picture = Picture.where(:album_id => params[:id]).order(:name)
   end
   
   def edit
   	@album = Album.find(params[:id])
-    @picture = Picture.where(:album_id => params[:id]).order(:name)
   end
   def update
 	@album = Album.find(params[:id])

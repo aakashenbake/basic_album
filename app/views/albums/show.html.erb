@@ -1,3 +1,4 @@
+<h1>Album detail</h1>
 <p>
   <strong>Name:</strong>
   <%= @album.name %>
@@ -7,6 +8,21 @@
   <strong>description:</strong>
   <%= @album.description %>
 </p>
-<%= link_to 'List', album_pictures_path(params[:id]) %>
-<%= link_to 'Edit', edit_album_path(params[:id]) %>
-<%= link_to 'Back', albums_path %>
+<strong>total no of pictures in album <%= @album.name%> is <%= @picture.count%></strong>
+<br><%= link_to 'Back', albums_path %><br>
+<h1>Listing picture</h1>
+<table border = "1">
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Image</th>
+  </tr>
+  
+ <% @picture.each do |picture| %>
+    <tr>
+     <td><%= picture.name %></td>
+      <td><%= picture.description %></td>
+      <td><%= link_to image_tag(picture.image.url(:large)),album_picture_path(:id =>picture.id, :album_id => params[:id]) %></td>
+    </tr>
+  <% end %>
+</table>

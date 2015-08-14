@@ -25,7 +25,9 @@
     <%= f.text_area :description, :required=>true %>
   </p>
  <p>
-    <%= f.file_field :image %>
+    <% f.fields_for :images do |i| %> 
+    <%= i.label "Image" %> <%= i.file_field :attachment %> 
+    <% end %>
   </p>
   <p>
     <%= f.submit %>

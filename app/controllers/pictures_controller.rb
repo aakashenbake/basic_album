@@ -36,9 +36,11 @@ class PicturesController < ApplicationController
 	end
 
  def destroy
+  debugger
   @picture = Picture.find(params[:id])
+  album_id = @picture.album_id
   @picture.destroy
-  redirect_to album_pictures_path
+  redirect_to album_path(album_id)
  end
 
  private

@@ -1,7 +1,6 @@
 <h1>Picture Edit</h1>
 
 <%= form_for @picture, url: album_picture_path(:album_id => @picture.album_id, :id => @picture.id), method: :patch do |f| %>
-<%#debugger%>
 <% if @picture.errors.any? %>
     <div id="error_explanation">
       <h2>
@@ -26,9 +25,14 @@
     <%= f.text_area :description, :required=>true %>
   </p>
  <p>
+ <%= link_to image_tag(@picture.image.url(:large)),album_picture_path(:id => params[:id])%>
+ </p>
+
+ <p>
     <%= f.file_field :image %>
   </p>
   <p>
     <%= f.submit %>
   </p>
 <% end %>
+<%= link_to 'Back', edit_album_path(params[:album_id]) %>
