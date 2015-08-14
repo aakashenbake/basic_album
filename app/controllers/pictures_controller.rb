@@ -5,6 +5,11 @@ class PicturesController < ApplicationController
  
  def new
    @picture = Picture.new(:album_id => params[:album_id])
+   #@picture.pictures.build
+   #respond _to do |f|
+   # f.html
+    #f.xml{render :xml => @picture}
+ # end
  end
  
  def create
