@@ -22,7 +22,7 @@
     <tr>
      <td><%= picture.name %></td>
       <td><%= picture.description %></td>
-      <td><%= link_to image_tag(picture.image.url(:large)),album_picture_path(:id =>picture.id, :album_id => params[:id]) %></td>
+      <td><%= link_to image_tag(picture.image.url(:small)),album_picture_path(:id =>picture.id, :album_id => params[:id]) %></td>
     </tr>
   <% end %>
 </table>

@@ -26,7 +26,6 @@ class AlbumsController < ApplicationController
 	def destroy
 	  @album = Album.find(params[:id])
 	  @album.destroy
-	 
 	  redirect_to albums_path
 	end
   
@@ -40,8 +39,7 @@ class AlbumsController < ApplicationController
   def create
     @album = current_user.albums.new(album_params)
     @album.save
-  
-	  redirect_to albums_path
+    redirect_to albums_path
   end
 
 private
