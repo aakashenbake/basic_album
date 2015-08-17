@@ -13,7 +13,9 @@ class PicturesController < ApplicationController
  end
  
  def create
+  debugger
   @picture = current_user.pictures.new(picture_params)
+  
   @picture.save
   redirect_to album_pictures_path
  end

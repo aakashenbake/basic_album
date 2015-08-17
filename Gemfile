@@ -7,7 +7,7 @@ gem 'rails_12factor'
 
 
 
-#gem 'sqlite3'
+gem 'sqlite3'
 gem 'pg'
 
 # Use SCSS for stylesheets

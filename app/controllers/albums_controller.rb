@@ -13,8 +13,9 @@ class AlbumsController < ApplicationController
   	@album = Album.find(params[:id])
     @picture = Picture.where(:album_id => params[:id]).order(:name)
   end
+  
   def update
-	@album = Album.find(params[:id])
+	 @album = Album.find(params[:id])
 		if @album.update(album_params)
 	    	redirect_to @album
 	  	else
@@ -28,23 +29,29 @@ class AlbumsController < ApplicationController
 	 
 	  redirect_to albums_path
 	end
+  
   def new
   	@album = Album.new
-    @album.pictures.build
-    respond_to do |f|
-      f.html
-      f.xml{render :xml => @picture}
+    2.times do
+      @album.pictures.build
     end
   end
-  
+
   def create
-  	@album = current_user.albums.new(album_params)
-	  @album.save
+    debugger
+    @album = current_user.albums.new(album_params)
+    @album.save
   
-	  redirect_to @album
+	  redirect_to albums_path
   end
+
 private
   def album_params
-    params.require(:album).permit( :name, :description)
+    params.require(:album).permit( :name, :description, pictures_attributes:[:album_id,:name, :description,:image])
   end
+
+  #def picture_params
+  #  params.require(:pictures_attributes).permit(:name,:album_id, :description,:image)
+  #end
+
 end
