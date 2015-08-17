@@ -38,7 +38,6 @@ class AlbumsController < ApplicationController
   end
 
   def create
-    debugger
     @album = current_user.albums.new(album_params)
     @album.save
   
@@ -49,9 +48,4 @@ private
   def album_params
     params.require(:album).permit( :name, :description, pictures_attributes:[:album_id,:name, :description,:image])
   end
-
-  #def picture_params
-  #  params.require(:pictures_attributes).permit(:name,:album_id, :description,:image)
-  #end
-
 end
