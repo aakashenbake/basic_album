@@ -13,7 +13,7 @@ default: &default
 
 development:
   <<: *default
-  database: db/11111A.sqlite3
+  database: db/11111b.sqlite3
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -25,11 +25,11 @@ development:
 
 #un comment below for heroku server
 #production:
-development:
-  adapter: postgresql
-  pool: 5
-  timeout: 5000
-  username: postgres
-  password: 
- # <<: *default
- # database: db/production.sqlite3
+#development:
+#  adapter: postgresql
+#  pool: 5
+#  timeout: 5000
+#  username: postgres
+#  password: 
+# <<: *default
+#  database: db/production.sqlite3
