@@ -1,4 +1,5 @@
 class PicturesController < ApplicationController
+ load_and_authorize_resource
  def index
  	@picture = Picture.where(:album_id => params[:album_id])
  end

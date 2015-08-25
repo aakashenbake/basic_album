@@ -17,11 +17,10 @@
 	  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
 	<% end %>
 	<% if notice %>
-		<p class="alert alert-success"><font color="green"><%= notice %></font></p>
+	  <p class="alert alert-success" color = "yellow"><%= notice %></p>
 	<% end %>
 	<% if alert %>
-		<p class="alert alert-danger"><font color="red"><%= alert %></font></p>
-	  
+	  <p class="alert alert-danger" color = "red"><%= alert %></p>
 	<% end %>
 <hr><br>
 	<%= yield %>

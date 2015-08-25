@@ -38,6 +38,8 @@ class Ability
 
       if(user.roll == "admin") 
         can :manage, :all
+        cannot :destroy, Album
+        cannot [:update,:edit], Picture
       else
         can :crud, :all
       end
