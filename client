@@ -1,0 +1,2 @@
+      invoke  active_record
+      create    db/migrate/20150825052246_add_roll_to_user.rb

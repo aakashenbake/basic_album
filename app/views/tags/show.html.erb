@@ -1,0 +1,15 @@
+<table border = "1">
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Image</th>
+  </tr>
+  
+ <% @picture.each do |picture| %>
+    <tr>
+     <td><%= picture.name %></td>
+      <td><%= picture.description %></td>
+      <td><%= link_to image_tag(picture.image.url(:small)),album_picture_path(:id =>picture.id, :album_id => params[:id]) %></td>
+    </tr>
+  <% end %>
+</table>

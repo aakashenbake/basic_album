@@ -2,7 +2,12 @@ Rails.application.routes.draw do
   resources :albums do
   resources :pictures 
   end
+  resources :tags 
+
   devise_for :users
+
+  # devise_for :users, controllers: {registrations: 'users/registrations'}
+
   # get 'image/index'
 
   # The priority is based upon order of creation: first created -> highest priority.

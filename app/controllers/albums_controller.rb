@@ -1,7 +1,17 @@
 class AlbumsController < ApplicationController
-  def index
-  	@albums = Album.where(:user_id => current_user.id).order(:title)
+  load_and_authorize_resource #:index,:show,:edit,:update,:destroy,:new,:create
+  CountForPictureUpload=2
 
+  def index
+    if (current_user.present?)
+  	    if (current_user.roll == "admin")
+          @albums = Album.all
+        else
+          @albums = Album.where(:user_id => current_user.id).order(:title)
+        end
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def show
@@ -31,19 +41,19 @@ class AlbumsController < ApplicationController
   
   def new
   	@album = Album.new
-    2.times do
-      @album.pictures.build
-    end
   end
 
   def create
     @album = current_user.albums.new(album_params)
-    @album.save
-    redirect_to albums_path
+    if @album.save
+      redirect_to albums_path
+    else
+      render @album.errors
+    end
   end
 
 private
   def album_params
-    params.require(:album).permit( :name, :description, pictures_attributes:[:album_id,:name, :description,:image])
+    params.require(:album).permit( :name, :description, pictures_attributes:[:album_id,:name, :description,:image ,tags_attributes:[:name]])
   end
 end

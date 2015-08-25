@@ -28,6 +28,12 @@
     <%= f.file_field :image %>
   </p>
   <p>
+    <%=f.fields_for :tags do |t|%>
+      <%=t.label :Tag%>
+      <%=t.text_field :name%><br/>
+    <% end %>
+  </p>
+  <p>
     <%= f.submit %>
   </p>
  <%= link_to 'Back', album_pictures_path %>

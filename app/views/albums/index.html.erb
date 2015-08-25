@@ -4,15 +4,18 @@
   <tr>
     <th>Name</th>
     <th>Description</th>
+    <th>Owner</th>
     <th>Show</th>
     <th>Edit</th>
     <th>Destroy</th>
   </tr>
  
   <% @albums.each do |album| %>
+    <%#debugger%>
     <tr>
       <td><%= album.name %></td>
       <td><%= album.description %></td>
+      <td><%=User.find(album.user_id).email%></td>
       <td><%= link_to 'Show', album_path(album) %></td>
       <td><%= link_to 'Edit', edit_album_path(album) %></td>
       <td><%= link_to 'Destroy', album_path(album),method: :delete,data: { confirm: 'Are you sure?' } %></td>

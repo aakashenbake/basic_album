@@ -1,7 +1,10 @@
 class Picture < ActiveRecord::Base
   	belongs_to :album
-	  belongs_to :user
-    has_many :tags
+	belongs_to :user
+
+    # acts_as_taggable_on :tags
+    
+    has_and_belongs_to_many :tags
     
     accepts_nested_attributes_for :tags
 
@@ -9,16 +12,15 @@ class Picture < ActiveRecord::Base
     
     validates :image, :presence => true
 
-    validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
+    validates_attachment_content_type :image ,:content_type => ['image/jpeg', 'image/jpg', 'image/png']
     
-    def all_tags=(names)
-      self.tags = names.split(",").map do |name|
-          Tag.where(name: name.strip).first_or_create!
-      end
-    end
+    before_save :check_tag
 
-    def all_tags
-      self.tags.map(&:name).join(", ")
+    def check_tag
+        tag_list = self.tags[0].name.to_s.split(',')
+        self.tags.destroy_all
+        tag_list.each do |obj|
+            self.tags.concat(Tag.where(name: obj).first_or_create!)
+        end
     end
-
 end

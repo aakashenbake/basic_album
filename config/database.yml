@@ -24,12 +24,9 @@ development:
 
 
 #un comment below for heroku server
-#production:
-#development:
-#  adapter: postgresql
-#  pool: 5
-#  timeout: 5000
-#  username: postgres
-#  password: 
-# <<: *default
-#  database: db/production.sqlite3
+production:
+ adapter: postgresql
+ pool: 5
+ timeout: 5000
+ username: postgres
+ password: 
