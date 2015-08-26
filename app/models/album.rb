@@ -1,4 +1,5 @@
 class Album < ActiveRecord::Base
+	acts_as_paranoid
 	has_many :pictures, dependent: :destroy
 	belongs_to :user
 	

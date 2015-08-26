@@ -1,8 +1,9 @@
 class Picture < ActiveRecord::Base
-  	belongs_to :album
-	belongs_to :user
+  	
+    acts_as_paranoid
 
-    # acts_as_taggable_on :tags
+    belongs_to :album
+	belongs_to :user
     
     has_and_belongs_to_many :tags
     
@@ -15,12 +16,12 @@ class Picture < ActiveRecord::Base
     validates_attachment_content_type :image ,:content_type => ['image/jpeg', 'image/jpg', 'image/png']
     
     before_save :check_tag
-
-    def check_tag
-        tag_list = self.tags[0].name.to_s.split(',')
-        self.tags.destroy_all
-        tag_list.each do |obj|
-            self.tags.concat(Tag.where(name: obj).first_or_create!)
+    private
+        def check_tag
+            tag_list = self.tags[0].name.to_s.split(',')
+            self.tags.destroy_all
+            tag_list.each do |obj|
+                self.tags.concat(Tag.where(name: obj).first_or_create!)
+            end
         end
-    end
 end

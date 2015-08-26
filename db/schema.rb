@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150825052339) do
+ActiveRecord::Schema.define(version: 20150826055733) do
 
 # Could not dump table "albums" because of following NoMethodError
 #   undefined method `[]' for nil:NilClass
@@ -25,7 +25,10 @@ ActiveRecord::Schema.define(version: 20150825052339) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.datetime "deleted_at"
   end
+
+  add_index "pictures", ["deleted_at"], name: "index_pictures_on_deleted_at"
 
   create_table "pictures_tags", id: false, force: :cascade do |t|
     t.integer "picture_id"
