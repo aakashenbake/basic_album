@@ -1,8 +1,17 @@
 class ApplicationController < ActionController::Base
-  # debugger
-  
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_path, :alert => exception.message
+    # redirect_to root_path, :alert => exception.message
+
+      if user_signed_in?
+        flash[:error] = "Not authorized to view this page"
+        session[:user_return_to] = nil
+        redirect_to root_url
+
+      else              
+        flash[:error] = "You must first login to view this page"
+        session[:user_return_to] = request.url
+        redirect_to "/users/sign_in"
+      end 
   end
 
 	before_filter do
@@ -17,7 +26,10 @@ class ApplicationController < ActionController::Base
   # before_action :authenticate_user!
 
   before_action :configure_permitted_parameters, if: :devise_controller?
-
+  # def after_sign_in_path_for(resource)
+  #   debugger
+  #   root_url 
+  # end
   protected
 
   def configure_permitted_parameters

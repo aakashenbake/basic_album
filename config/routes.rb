@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
+  root 'albums#index'
+  
+  devise_for :users
+    
   resources :albums do
     # put :restore
   resources :pictures 
   end
   resources :tags 
 
-  devise_for :users
 
   get '/restore/:id'=>'albums#restore', as: 'restore_album'
 
@@ -16,7 +19,6 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
-  root 'albums#index'
   
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

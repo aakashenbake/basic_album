@@ -1,6 +1,6 @@
 class AlbumsController < ApplicationController
-  load_and_authorize_resource
-    debugger
+  load_and_authorize_resource :except => :restore
+  # debugger
   def index
     if (current_user.present?)
   	    if (current_user.roll == "admin")
@@ -53,6 +53,7 @@ class AlbumsController < ApplicationController
   end
 
   def restore
+    # debugger
     Album.only_deleted.restore(params[:id])
     redirect_to albums_path
   end

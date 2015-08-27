@@ -1,6 +1,5 @@
 class Ability
   include CanCan::Ability
-
   def initialize(user)
     # Define abilities for the passed in user here. For example:
     #
@@ -41,8 +40,8 @@ class Ability
         cannot :destroy, Album
         cannot [:update,:edit], Picture
       else
-        # can :crud, :all 
-        can :crud, Album.with_deleted
+        can :crud, :all 
+        # can :crud, Album.with_deleted
       end
   end
 end

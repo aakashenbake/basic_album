@@ -49,7 +49,6 @@
                     <td><%= album.description %></td>
                     <td><%=User.find(album.user_id).email%></td> 
                     <td><%= link_to 'Restore', restore_album_path(album),data: { confirm: 'Are you sure?' } %></td>
-                    <!-- <td><%#link_to 'Restore', restore_company_url(company), data: {confirm: "Are you sure?"},:method => :put,:class=>"btn default btn-xs red-stripe"%></td> -->
                   </tr>
                   </tr>
                 <% end %>
