@@ -1,6 +1,6 @@
 class Picture < ActiveRecord::Base
   	
-    acts_as_paranoid
+    # acts_as_paranoid
 
     belongs_to :album
 	belongs_to :user

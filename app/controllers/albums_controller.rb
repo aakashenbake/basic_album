@@ -1,13 +1,13 @@
 class AlbumsController < ApplicationController
-  load_and_authorize_resource #:index,:show,:edit,:update,:destroy,:new,:create
-  CountForPictureUpload=2
-
+  load_and_authorize_resource
   def index
     if (current_user.present?)
   	    if (current_user.roll == "admin")
           @albums = Album.all
+          @albums_deleted = Album.only_deleted
         else
-          @albums = Album.where(:user_id => current_user.id).order(:title)
+          @albums = Album.where(:user_id => current_user.id)
+          @albums_deleted = Album.where(:user_id => current_user.id).only_deleted
         end
     else
       redirect_to new_user_session_path
@@ -34,9 +34,7 @@ class AlbumsController < ApplicationController
 	end
 
 	def destroy
-	  @album = Album.find(params[:id])
-    debugger
-	  @album.destroy
+	  Album.find(params[:id]).delete
 	  redirect_to albums_path
 	end
   
@@ -51,6 +49,11 @@ class AlbumsController < ApplicationController
     else
       render @album.errors
     end
+  end
+
+  def restore
+    Album.only_deleted.restore(params[:id])
+    redirect_to albums_path
   end
 
 private

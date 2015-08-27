@@ -1,15 +1,15 @@
 Rails.application.routes.draw do
   resources :albums do
+    # put :restore
   resources :pictures 
   end
   resources :tags 
 
   devise_for :users
 
-  # devise_for :users, controllers: {registrations: 'users/registrations'}
+  get '/restore/:id'=>'albums#restore', as: 'restore_album'
 
-  # get 'image/index'
-
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
