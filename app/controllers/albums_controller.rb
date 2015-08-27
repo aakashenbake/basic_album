@@ -1,5 +1,6 @@
 class AlbumsController < ApplicationController
   load_and_authorize_resource
+    debugger
   def index
     if (current_user.present?)
   	    if (current_user.roll == "admin")
