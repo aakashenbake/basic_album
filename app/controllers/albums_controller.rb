@@ -36,12 +36,9 @@ class AlbumsController < ApplicationController
 	end
   
   def new
-    # @album = Album.new  
   end
 
   def create
-    debugger
-    # @album = current_user.albums.new(album_params)
     if @album.save
       redirect_to albums_path
     else
@@ -58,9 +55,7 @@ private
   def album_call
     debugger
     @album ||= params[:id].present? ? Album.find(params[:id]) : params[:action]=="create" ? current_user.albums.new(album_params): Album.new
-    # debugger
-      # @album ||= Album.find(params[:id])
-      @picture ||= Picture.where(:album_id => params[:id]).order(:name)
+    @picture ||= Picture.where(:album_id => params[:id]).order(:name)
   end
   helper_method :album_call
   def album_params
