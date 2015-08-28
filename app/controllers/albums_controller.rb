@@ -1,6 +1,7 @@
 class AlbumsController < ApplicationController
   load_and_authorize_resource :except => :restore
-  # debugger
+  before_action :album_call, only: [:show, :edit,:destroy,:update,:new,:create]
+  
   def index
     if (current_user.present?)
   	    if (current_user.roll == "admin")
@@ -16,18 +17,13 @@ class AlbumsController < ApplicationController
   end
 
   def show
-  	@album = Album.find(params[:id])
-    @picture = Picture.where(:album_id => params[:id]).order(:name)
   end
   
   def edit
-  	@album = Album.find(params[:id])
-    @picture = Picture.where(:album_id => params[:id]).order(:name)
   end
   
   def update
-	 @album = Album.find(params[:id])
-		if @album.update(album_params)
+   if @album.update(album_params)
 	    	redirect_to @album
 	  	else
 	    	render 'edit'
@@ -35,16 +31,17 @@ class AlbumsController < ApplicationController
 	end
 
 	def destroy
-	  Album.find(params[:id]).delete
-	  redirect_to albums_path
+	  @album.delete
+    redirect_to albums_path#
 	end
   
   def new
-  	@album = Album.new
+    # @album = Album.new  
   end
 
   def create
-    @album = current_user.albums.new(album_params)
+    debugger
+    # @album = current_user.albums.new(album_params)
     if @album.save
       redirect_to albums_path
     else
@@ -53,12 +50,19 @@ class AlbumsController < ApplicationController
   end
 
   def restore
-    # debugger
     Album.only_deleted.restore(params[:id])
     redirect_to albums_path
   end
 
 private
+  def album_call
+    debugger
+    @album ||= params[:id].present? ? Album.find(params[:id]) : params[:action]=="create" ? current_user.albums.new(album_params): Album.new
+    # debugger
+      # @album ||= Album.find(params[:id])
+      @picture ||= Picture.where(:album_id => params[:id]).order(:name)
+  end
+  helper_method :album_call
   def album_params
     params.require(:album).permit( :name, :description, pictures_attributes:[:album_id,:name, :description,:image ,tags_attributes:[:name]])
   end
