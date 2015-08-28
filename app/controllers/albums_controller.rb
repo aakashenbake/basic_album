@@ -53,7 +53,7 @@ class AlbumsController < ApplicationController
 
 private
   def album_call
-    @album ||= params[:id].present? ? Album.find(params[:id]) : params[:action]=="create" ? current_user.albums.new(album_params): Album.new
+    @album = params[:id].present? ? Album.find(params[:id]) : params[:action]=="create" ? current_user.albums.new(album_params): Album.new
     @picture ||= Picture.where(:album_id => params[:id]).order(:name)
   end
   helper_method :album_call
