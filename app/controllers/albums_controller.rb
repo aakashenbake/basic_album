@@ -1,9 +1,11 @@
 class AlbumsController < ApplicationController
   load_and_authorize_resource :except => :restore
-  before_action :album_call, only: [:show, :edit,:destroy,:update,:new,:create]
-  
+  # before_action :album_call, only: [:show, :edit,:destroy,:update,:new,:create]
+  before_action :album_call
+  skip_before_action :album_call, only:[:restore,:index] 
   def index
     if (current_user.present?)
+          album_call
   	    if (current_user.roll == "admin")
           @albums = Album.all
           @albums_deleted = Album.only_deleted
@@ -32,7 +34,7 @@ class AlbumsController < ApplicationController
 
 	def destroy
 	  @album.delete
-    redirect_to albums_path#
+    redirect_to albums_path
 	end
   
   def new
@@ -53,11 +55,18 @@ class AlbumsController < ApplicationController
 
 private
   def album_call
-    @album = params[:id].present? ? Album.find(params[:id]) : params[:action]=="create" ? current_user.albums.new(album_params): Album.new
+    # debugger
+    @album = params[:id].present? ? Album.find(params[:id]) : current_user.albums.new(album_params)
+    # @album = params[:id].present? ? Album.find(params[:id]) : params[:action]=="create" ? current_user.albums.new(album_params): Album.new
     @picture ||= Picture.where(:album_id => params[:id]).order(:name)
   end
   helper_method :album_call
   def album_params
-    params.require(:album).permit( :name, :description, pictures_attributes:[:album_id,:name, :description,:image ,tags_attributes:[:name]])
+      # params.require(:album).permit( :name, :description, pictures_attributes:[:album_id,:name, :description,:image ,tags_attributes:[:name]])
+    if(params[:name].present?)
+      params.require(:album).permit( :name, :description, pictures_attributes:[:album_id,:name, :description,:image ,tags_attributes:[:name]])
+    else
+      return nil  
+    end
   end
 end

@@ -1,0 +1,53 @@
+<h1>Editing album</h1>
+ 
+<%= form_for :album, url: album_path(@album), method: :patch do |f| %>
+ 
+  <% if @album.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@album.errors.count, "error") %> prohibited
+        this album from being saved:
+      </h2>
+      <ul>
+        <% @album.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+  <p>
+    <%= f.label :name%><br>
+    <%= f.text_field :name, :required=>true%>
+  </p>
+  <p>
+    <%= f.label :description %><br>
+    <%= f.text_area :description, :required=>true %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p> 
+<% end %>
+<%= link_to 'Back', albums_path %>
+
+<h1>Listing picture</h1>
+<%= link_to 'New Picture', new_album_picture_path(:album_id => params[:id]) %> 
+<table border = "1">
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Image</th>
+    <th>Edit</th>
+    <th>Destroy</th>
+  </tr>
+  
+ <% @picture.each do |picture| %>
+    <tr>
+     <td><%= picture.name %></td>
+      <td><%= picture.description %></td>
+      <td><%= link_to image_tag(picture.image.url(:large)),album_picture_path(:id =>picture.id, :album_id => params[:id]) %></td>
+      <td><%= link_to 'Edit', edit_album_picture_path(:id =>picture.id, :album_id => params[:id]) %></td>
+      <td><%= link_to 'Destroy', album_picture_path(:id =>picture.id, :album_id => params[:id]),method: :delete,data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>

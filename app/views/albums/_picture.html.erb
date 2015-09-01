@@ -1,0 +1,31 @@
+<div>
+	<div class="col-lg-12">
+		<h1 class="page-header">
+			Listing picture
+		</h1>
+	</div>
+
+	<% @picture.each do |picture|%>
+	<div class ="col">
+	    <div class="col-md-3 thumb ">
+	        <%= link_to image_tag((picture.image.url(:med)) ,:size => "200"),album_picture_path(:id =>picture.id, :album_id => params[:id]),:class => "img-responsive thumbnail"%>
+	        <div class="col-md-12">
+	          <p class="col-md-5"><strong>Name</strong></p>
+	          <p class="col-md-7"><%= picture.name %></p>   
+	        </div>
+	        <div class="col-md-12">
+	          <p class="col-md-5"><strong>Descreption</strong></p>
+	          <p class="col-md-7"><%= picture.description%></p>   
+	        </div>
+	        <div class="col-md-12">
+	          <p class="col-md-5"><strong>Tags</strong></p>
+	          <p class="col-md-7">
+	          	<%Picture.find(picture.id).tags.each do |obj| %> 
+	          		<%= link_to obj.name.to_s,tag_path(obj.id)%>
+	          	<%end%>	
+	          </p>   
+	        </div>
+	    </div>
+    </div>
+  <%end%>
+</div>

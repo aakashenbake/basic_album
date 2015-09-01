@@ -1,16 +1,18 @@
-<h1>Listing albums</h1>
- <%= link_to 'Album creation', new_album_path %>
+<h1>Photo Galary</h1>
+ <%#= link_to 'Album creation', new_album_path ,:class => "btn btn-default"%>
  <%= javascript_include_tag 'tabs', 'data-turbolinks-track' => true %>
 
 <div class="tabs">
     <ul class="tab-links">
         <li class="active"><a href="#tab1">All Album</a></li>
         <li><a href="#tab2">Deleted Album</a></li>
+        <li><a href="#tab3">New Album</a></li>
+        <!-- <li> <%#= link_to 'New Album', new_album_path %> </li> -->
     </ul>
  
     <div class="tab-content">
         <div id="tab1" class="tab active">
-            <table border>
+            <table class="table table-hover">
                 <tr>
                   <th>Name</th>
                   <th>Description</th>
@@ -35,7 +37,7 @@
         </div>
  
         <div id="tab2" class="tab">
-            <table>
+            <table class="table table-hover">
                 <tr>
                   <th>Name</th>
                   <th>Description</th>
@@ -53,6 +55,9 @@
                   </tr>
                 <% end %>
               </table>
+        </div> 
+         <div id="tab3" class="tab col-md-12">
+            <%=render 'new'%>
         </div>
     </div>
 </div>

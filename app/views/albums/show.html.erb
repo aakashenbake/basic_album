@@ -1,33 +1,15 @@
 <h1>Album detail</h1>
-<p>
-  <strong>Name:</strong>
-  <%= @album.name %>
-</p>
- 
-<p>
-  <strong>description:</strong>
-  <%= @album.description %>
-</p>
-<strong>total no of pictures in album <%= @album.name%> is <%= @picture.count%></strong>
-<br><%= link_to 'Back', albums_path %><br>
-<h1>Listing picture</h1>
-<table border = "1">
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Image</th>
-    <th>Tags</th>
-  </tr>
-  
- <% @picture.each do |picture| %>
-    <tr>
-     <td><%= picture.name %></td>
-      <td><%= picture.description %></td>
-      <td><%= link_to image_tag(picture.image.url(:small)),album_picture_path(:id =>picture.id, :album_id => params[:id]) %></td>
-      <td><%Picture.find(picture.id).tags.each do |obj| %>
-            <%= link_to obj.name.to_s,tag_path(obj.id)%>
-            <%end%> 
-      </td>
-    </tr>
-  <% end %>
-</table>
+<div class = "col-md-12">
+  <div>
+    <p class = "col-md-2"><strong >Name:</strong></p>
+    <p class = "col-md-10"><%= @album.name %></p>
+  </div>
+   
+  <div>
+    <p class = "col-md-2"><strong>Description:</strong></p>
+    <p class = "col-md-10"><%= @album.description %></p>
+  </div>
+  <p class = "text-capitalize col-md-12 "><strong>total no of pictures in album <%= @album.name%> is <%= @picture.count%></strong></p>
+  <br><%= link_to 'Back', albums_path ,:class=>"btn btn-default"%><br>
+</div>
+<%=render 'picture'%>

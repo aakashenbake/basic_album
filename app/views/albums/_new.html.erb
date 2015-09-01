@@ -1,0 +1,48 @@
+<div class="col-md-12">
+  <%= form_for @album,:role => "form" ,:html => {multipart: true } do |f| %>
+    <p>
+      <%= f.label :name,:class=>"col-md-6"%>
+      <%= f.text_field :name, autofocus: true,:required => "true",:class=>"form-control col-md-6",:placeholder=>"Album Name"%>
+    </p>
+    <p>
+      <%= f.label :description,:class=>"col-md-6"%>
+      <%= f.text_field :description,:required => "true",:class=>"form-control col-md-6",:placeholder=>"Album Description"%>
+    </p>   
+    <p class="col-md-12">Picture</p>
+    <div class="col-md-12">
+      <%5.times do%>
+        <%= f.fields_for :pictures, @album.pictures.new  do |p| %>
+        <td>
+          <div class="col-md-6">
+            <div class="col-md-12">
+              <%= p.label :name,:class=>"col-md-4"%>
+              <%= p.text_field :name, :required=>true,:placeholder=>"Picture Name",:class=>"col-md-8"%>
+            </div>
+            <div class="col-md-12">
+              <%= p.label :description,:class=>"col-md-4" %>
+              <%= p.text_field :description, :required=>true ,:placeholder=>"Picture Description",:class=>"col-md-8"%>
+            </div>
+            <div class="col-md-12">
+              <%=p.fields_for :tags,p.object.tags.new do |t|%>
+                  <%=t.label :Tag,:class=>"col-md-4"%>
+                  <%= t.text_field :name,:required => "true",:placeholder=>"Picture Tags",:class=>"col-md-8"%>
+                <% end %>
+            </div>
+            <div class="col-md-12">
+            <%= p.label :image,:class=>"col-md-4"%>
+              <%= p.file_field :image ,:class=>"col-md-8"%>
+               <br><br><br>
+            </div>
+          </div>
+          </td>
+        <%end %>
+      <% end %>
+    </div>
+</div>
+<div class="col-md-12">
+<br><br>
+    <%= f.submit :class => "btn btn-success"%>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),albums_path,:class => "btn btn-danger"%>
+</div>
+
+  <% end %>
