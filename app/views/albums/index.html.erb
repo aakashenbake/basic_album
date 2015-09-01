@@ -12,51 +12,53 @@
  
     <div class="tab-content">
         <div id="tab1" class="tab active">
-            <table class="table table-hover">
-                <tr>
-                  <th>Name</th>
-                  <th>Description</th>
-                  <th>Owner</th>
-                  <th>Show</th>
-                  <th>Edit</th>
-                  <th>Delete</th>
-                </tr>
-               
-                <% @albums.each do |album| %>
-                  <tr>
-                    <td><%= album.name %></td>
-                    <td><%= album.description %></td>
-                    <td><%=User.find(album.user_id).email%></td>
-                    <td><%= link_to 'Show', album_path(album) %></td>
-                    <td><%= link_to 'Edit', edit_album_path(album) %></td>
-                    <td><%= link_to 'Delete', album_path(album),method: :delete,data: { confirm: 'Are you sure?' } %></td>
-                  </tr>
-                  </tr>
-                <% end %>
-              </table>
+          <%= paginate @albums %>
+          <table class="table table-hover">
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Owner</th>
+              <th>Show</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+           
+            <% @albums.each do |album| %>
+            <tr>
+              <td><%= album.name %></td>
+              <td><%= album.description %></td>
+              <td><%=User.find(album.user_id).email%></td>
+              <td><%= link_to 'Show', album_path(album) %></td>
+              <td><%= link_to 'Edit', edit_album_path(album) %></td>
+              <td><%= link_to 'Delete', album_path(album),method: :delete,data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+            <% end %>
+          </table>
+          <%= paginate @albums %>
         </div>
  
         <div id="tab2" class="tab">
-            <table class="table table-hover">
-                <tr>
-                  <th>Name</th>
-                  <th>Description</th>
-                  <th>Owner</th>
-                  <th>Restore</th>
-                </tr>
-               
-                <% @albums_deleted.each do |album| %>
-                  <tr>
-                    <td><%= album.name %></td>
-                    <td><%= album.description %></td>
-                    <td><%=User.find(album.user_id).email%></td> 
-                    <td><%= link_to 'Restore', restore_album_path(album),data: { confirm: 'Are you sure?' } %></td>
-                  </tr>
-                  </tr>
-                <% end %>
-              </table>
+          <%= paginate @albums %>
+          <table class="table table-hover">
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Owner</th>
+              <th>Restore</th>
+            </tr>
+           
+            <% @albums_deleted.each do |album| %>
+            <tr>
+              <td><%= album.name %></td>
+              <td><%= album.description %></td>
+              <td><%=User.find(album.user_id).email%></td> 
+              <td><%= link_to 'Restore', restore_album_path(album),data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+            <% end %>
+          </table>
+          <%= paginate @albums %>
         </div> 
-         <div id="tab3" class="tab col-md-12">
+         <div id="tab3" class="tab">
             <%=render 'new'%>
         </div>
     </div>

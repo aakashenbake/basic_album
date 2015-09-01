@@ -4,7 +4,7 @@
 			Listing picture
 		</h1>
 	</div>
-
+	<%= paginate @picture %>
 	<% @picture.each do |picture|%>
 	<div class ="col">
 	    <div class="col-md-3 thumb ">
@@ -26,6 +26,7 @@
 	          </p>   
 	        </div>
 	    </div>
-    </div>
-  <%end%>
+  	<%end%>
+   </div>
+  <%= paginate @picture %>
 </div>

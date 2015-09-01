@@ -1,17 +1,16 @@
 class AlbumsController < ApplicationController
   load_and_authorize_resource :except => :restore
-  # before_action :album_call, only: [:show, :edit,:destroy,:update,:new,:create]
   before_action :album_call
   skip_before_action :album_call, only:[:restore,:index] 
   def index
     if (current_user.present?)
           album_call
   	    if (current_user.roll == "admin")
-          @albums = Album.all
-          @albums_deleted = Album.only_deleted
+          @albums = Album.all.page(params[:page])
+          @albums_deleted = Album.only_deleted.page(params[:page])
         else
-          @albums = Album.where(:user_id => current_user.id)
-          @albums_deleted = Album.where(:user_id => current_user.id).only_deleted
+          @albums = Album.where(:user_id => current_user.id).page(params[:page])
+          @albums_deleted = Album.where(:user_id => current_user.id).only_deleted.page(params[:page])
         end
     else
       redirect_to new_user_session_path
@@ -56,9 +55,8 @@ class AlbumsController < ApplicationController
 private
   def album_call
     # debugger
-    @album = params[:id].present? ? Album.find(params[:id]) : current_user.albums.new(album_params)
-    # @album = params[:id].present? ? Album.find(params[:id]) : params[:action]=="create" ? current_user.albums.new(album_params): Album.new
-    @picture ||= Picture.where(:album_id => params[:id]).order(:name)
+    @album = params[:id].present? ? Album.find(params[:id]): current_user.albums.new(album_params)
+    @picture ||= Picture.where(:album_id => params[:id]).order(:name).page(params[:page])
   end
   helper_method :album_call
   def album_params
