@@ -5,7 +5,7 @@ class PicturesController < ApplicationController
  end
  
  def new
-   @picture = Picture.new(:album_id => params[:album_id])
+   @picture_new = Picture.new(:album_id => params[:album_id])
  end
  
  def create
@@ -17,7 +17,6 @@ class PicturesController < ApplicationController
  
  def show
   	@picture = Picture.find(params[:id])
-
  end
  
  def edit
@@ -43,7 +42,7 @@ class PicturesController < ApplicationController
  private
  
   def picture_params
-    params.require(:picture).permit(:name,:album_id, :description,:image, :all_tags)
+    params.require(:picture).permit(:name,:album_id, :description,:image,tags_attributes:[:name])
   end
 
 end

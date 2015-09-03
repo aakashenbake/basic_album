@@ -11,7 +11,7 @@ class Picture < ActiveRecord::Base
 
     has_attached_file :image, styles: { small: "100x100", med: "200x200", large: "300x300" },:path => ":rails_root/public/images/:id/:filename",:url  => "/images/:id/:filename"
     
-    validates :image, :presence => true
+    #validates :image, :presence => true
 
     validates_attachment_content_type :image ,:content_type => ['image/jpeg', 'image/jpg', 'image/png']
     

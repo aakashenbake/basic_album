@@ -1,22 +1,7 @@
 <h1>Editing album</h1>
 <div class="col-md-12">
-  <div>
-    <%= form_for :album, url: album_path(@album), method: :patch do |f| %>
-     
-      <% if @album.errors.any? %>
-        <div id="error_explanation">
-          <h2>
-            <%= pluralize(@album.errors.count, "error") %> prohibited
-            this album from being saved:
-          </h2>
-          <ul>
-            <% @album.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
-     <br>
+    <%= form_for @album,:role => "form",:url => album_path(:id=>@album.id),:html => {multipart: true }, method: :patch do |f| %>
+    <div>
       <div class="col-md-12">
         <%= f.label :name ,:class=>"col-md-2"%>
         <%= f.text_field :name,:placeholder => "Album Name", :required=>true,:class=>"input-lg col-md-4"%>
@@ -30,13 +15,19 @@
       </div>
       <div class="col-md-12">
       <br>
-        <%= f.submit :class=>"btn btn-primary"%>
-        <%= link_to 'Back', albums_path ,:class=>"btn btn-default"%>
-        <%= link_to 'New Picture', new_album_picture_path(:album_id => params[:id]),:class=>"btn btn-default" %> 
       </div> 
-    <% end %>
   </div>
 
   <br>
+
   <%=render 'picture'%>
+  <div class ="col-md-12">
+    <h1>Add A Picture</h1>
+    <%#= form_for @album,:role => "form" ,:html => {multipart: true } do |f| %>
+      <%=render 'new_picture',f: f%>
+    <%#end%>
+    <%= f.submit :class=>"btn btn-primary"%>
+    <%= link_to 'Back', albums_path ,:class=>"btn btn-default"%>
+  </div>
+  <%end%>
 </div>

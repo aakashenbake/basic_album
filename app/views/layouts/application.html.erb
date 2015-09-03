@@ -11,17 +11,17 @@
 	<% if user_signed_in? %>
 	  Logged in as <strong><%= current_user.email %></strong>.
 	  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-	  <%= link_to "", destroy_user_session_path, method: :delete, :class => 'glyphicon glyphicon-off navbar-link'  %>
+	  <%= link_to "", destroy_user_session_path, method: :delete, :class => 'glyphicon glyphicon-off navbar-link'  %> | 
+	  <%= link_to "", root_path, :class => 'glyphicon glyphicon-home'  %>
 	  
 	<% end %>
 
 	<% if current_user.present? %>
 		<% if notice %>
-			<p class="alert alert-success"><%= notice %></p>
+			<p class="alert alert-success "><%= notice %></p>
 		<% end %>
 		<% if alert %>
-			<p class="alert alert-danger"><%= alert %></font></p>
-		  
+			<p class="alert alert-danger "><%= alert %></font></p>
 		<% end %>
 	<% end %>
 	<div class="col-md-12"></div>

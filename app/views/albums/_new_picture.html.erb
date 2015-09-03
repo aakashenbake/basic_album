@@ -1,0 +1,23 @@
+<%= f.fields_for :pictures, @album.pictures.new  do |p| %>
+  <div class="col-md-6">
+    <div class="col-md-12">
+      <%= p.label :name,:class=>"col-md-4"%>
+      <%= p.text_field :name,:placeholder=>"Picture Name",:class=>"col-md-8"%>
+    </div>
+    <div class="col-md-12">
+      <%= p.label :description,:class=>"col-md-4" %>
+      <%= p.text_field :description ,:placeholder=>"Picture Description",:class=>"col-md-8"%>
+    </div>
+    <div class="col-md-12">
+      <%=p.fields_for :tags,p.object.tags.new do |t|%>
+          <%=t.label :Tag,:class=>"col-md-4"%>
+          <%= t.text_field :name,:placeholder=>"Picture Tags",:class=>"col-md-8"%>
+        <% end %>
+    </div>
+    <div class="col-md-12">
+    <%= p.label :image,:class=>"col-md-4"%>
+      <%= p.file_field :image ,:class=>"col-md-8"%>
+       <br><br><br>
+    </div>
+  </div>
+<%end %>

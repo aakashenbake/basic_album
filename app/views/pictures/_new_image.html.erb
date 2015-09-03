@@ -1,0 +1,40 @@
+<%= form_for @picture_new, url: album_pictures_path do |f| %>
+<% if @picture.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@picture.errors.count, "error") %> prohibited
+        this picture from being saved:
+      </h2>
+      <ul>
+        <% @picture.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+  <p>
+    <%= f.hidden_field :album_id ,:value => @picture_new.album_id%>
+    <%= f.label :name%><br>
+    <%= f.text_field :name, :required=>true%>
+  </p>
+  <p>
+    <%= f.label :description %><br>
+    <%= f.text_area :description, :required=>true %>
+  </p>
+ <p>
+    <%= f.file_field :image %>
+  </p>
+   <p>
+
+        <%=f.fields_for :tags,f.object.tags.new do |t|%>
+          <%=t.label :Tag%>
+          <%= t.text_field :name%><br/>
+        <% end %>
+   </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+ <%= link_to 'Back', album_pictures_path %>
+<% end %>

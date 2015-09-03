@@ -9,7 +9,7 @@
     <p class = "col-md-2"><strong>Description:</strong></p>
     <p class = "col-md-10"><%= @album.description %></p>
   </div>
-  <p class = "text-capitalize col-md-12 "><strong>total no of pictures in album <%= @album.name%> is <%= @picture.count%></strong></p>
+  <p class = "text-capitalize col-md-12 "><strong>total no of pictures in album <%= @album.name%> is <%= @tPictures%></strong></p>
   <br><%= link_to 'Back', albums_path ,:class=>"btn btn-default"%><br>
 </div>
 <%=render 'picture'%>

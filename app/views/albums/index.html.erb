@@ -1,7 +1,18 @@
 <h1>Photo Galary</h1>
- <%#= link_to 'Album creation', new_album_path ,:class => "btn btn-default"%>
- <%= javascript_include_tag 'tabs', 'data-turbolinks-track' => true %>
-
+<%= javascript_include_tag 'tabs', 'data-turbolinks-track' => true %>
+<% if @album.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@album.errors.count, "error") %> prohibited
+      this album from being saved:
+    </h2>
+    <ul>
+      <% @album.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 <div class="tabs">
     <ul class="tab-links">
         <li class="active"><a href="#tab1">All Album</a></li>
@@ -38,7 +49,7 @@
         </div>
  
         <div id="tab2" class="tab">
-          <%= paginate @albums %>
+          <%= paginate @albums_deleted %>
           <table class="table table-hover">
             <tr>
               <th>Name</th>
@@ -56,7 +67,7 @@
             </tr>
             <% end %>
           </table>
-          <%= paginate @albums %>
+          <%= paginate @albums_deleted %>
         </div> 
          <div id="tab3" class="tab">
             <%=render 'new'%>
