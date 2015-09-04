@@ -49,7 +49,6 @@ class AlbumsController < ApplicationController
         render @album.errors
       end
     rescue Exception => e
-      # flash[:alert] = "has already been taken"
       flash[:alert]=@album.errors.full_messages.first
       redirect_to root_path 
     end
@@ -68,11 +67,11 @@ private
   helper_method :album_call
   def album_params
     if(params[:album].present?)
-      (0..params["album"]["pictures_attributes"].count-1).each do |key|
-        if(params["album"]["pictures_attributes"][key.to_s]["name"].blank?)
-          params["album"]["pictures_attributes"].delete(key.to_s)
-        end
-      end
+      # (0..params["album"]["pictures_attributes"].count-1).each do |key|
+      #   if(params["album"]["pictures_attributes"][key.to_s]["name"].blank?)
+      #     params["album"]["pictures_attributes"].delete(key.to_s)
+      #   end
+      # end
       params.require(:album).permit( :name, :description, pictures_attributes:[:album_id,:name, :description,:image ,tags_attributes:[:name]])
     else
       return nil  
