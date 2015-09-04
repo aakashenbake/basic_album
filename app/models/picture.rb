@@ -18,14 +18,14 @@ class Picture < ActiveRecord::Base
     before_save :check_blank_and_tags
     private
         def check_blank_and_tags
-            if (self.name.blank?)
-                self.destroy
-            else
+            # if (self.name.blank?)
+            #     self.destroy
+            # else
                 tag_list = self.tags[0].name.to_s.split(',')
                 self.tags.destroy_all
                 tag_list.each do |obj|
                     self.tags.concat(Tag.where(name: obj).first_or_create!)
                 end
-            end
+            # end
         end
 end
