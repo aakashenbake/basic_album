@@ -1,7 +1,7 @@
 class PicturesController < ApplicationController
  load_and_authorize_resource
  def index
- 	@picture = Picture.where(:album_id => params[:album_id])
+  @picture = Picture.where(:album_id => params[:album_id])
  end
  
  def new
@@ -16,21 +16,22 @@ class PicturesController < ApplicationController
  end
  
  def show
-  	@picture = Picture.find(params[:id])
+    @picture = Picture.find(params[:id])
  end
  
  def edit
-  	@picture = Picture.find(params[:id])
+    @picture = Picture.find(params[:id])
  end
  
  def update
-	@picture = Picture.find(params[:id])
-		if @picture.update(picture_params)
-	    	redirect_to album_pictures_path
-	  	else
-	    	render 'edit'
-	  	end
-	end
+  @picture = Picture.find(params[:id])
+    if @picture.update(picture_params)
+        redirect_to album_pictures_path
+      else
+        render 'edit'
+      end
+  end
+
 
  def destroy
   @picture = Picture.find(params[:id])

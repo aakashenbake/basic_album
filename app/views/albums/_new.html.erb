@@ -8,11 +8,13 @@
       <%= f.label :description,:class=>"col-md-6"%>
       <%= f.text_field :description,:required => "true",:class=>"form-control col-md-6",:placeholder=>"Album Description"%>
     </p>   
-    <p class="col-md-12">Picture</p>
+    <div class="col-md-12">
+    <p >Picture</p>
     <div class="col-md-12">
       <%6.times do%>
           <%=render 'new_picture', f: f%>
       <% end %>
+    </div>
     </div>
 </div>
 <div class="col-md-12">

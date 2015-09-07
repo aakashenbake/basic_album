@@ -1,16 +1,16 @@
 <h1>Editing album</h1>
 <div class="col-md-12">
     <%= form_for @album,:role => "form",:url => album_path(:id=>@album.id),:html => {multipart: true }, method: :patch do |f| %>
-    <div>
+    <div class="col-md-12">
       <div class="col-md-12">
         <%= f.label :name ,:class=>"col-md-2"%>
-        <%= f.text_field :name,:placeholder => "Album Name", :required=>true,:class=>"input-lg col-md-4"%>
+        <%= f.text_field :name,:placeholder => "Album Name", :required=>true,:class=>"input-md col-md-10"%>
         <br>
         <br>
       </div>
       <div class="col-md-12">
         <%= f.label :description ,:class=>"col-md-2"%>
-        <%= f.text_field :description,:placeholder => "Album Description", :required=>true,:class=>"input-lg col-md-4" %>
+        <%= f.text_field :description,:placeholder => "Album Description", :required=>true,:class=>"input-md col-md-10" %>
         <br>
       </div>
       <div class="col-md-12">
@@ -23,9 +23,7 @@
   <%=render 'picture'%>
   <div class ="col-md-12">
     <h1>Add A Picture</h1>
-    <%#= form_for @album,:role => "form" ,:html => {multipart: true } do |f| %>
-      <%=render 'new_picture',f: f%>
-    <%#end%>
+    <%=render 'new_picture',f: f%>
     <%= f.submit :class=>"btn btn-primary"%>
     <%= link_to 'Back', albums_path ,:class=>"btn btn-default"%>
   </div>

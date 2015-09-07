@@ -59,6 +59,19 @@ class AlbumsController < ApplicationController
     redirect_to albums_path
   end
 
+  def destroy_multiple
+    if params[:picture_ids].present?
+      params[:picture_ids].each do |id|
+        Picture.find(id.to_i).destroy
+      end
+    end
+    redirect_to album_path(params[:album_id])
+  end
+  def destroy_multiple_show
+    @pictures=Picture.where(:album_id => params[:album_id]).order(:name)
+    render 'destroy_multiple'
+  end
+
 private
   def album_call
     @album = params[:id].present? ? Album.find(params[:id]): current_user.albums.new(album_params)
@@ -67,12 +80,7 @@ private
   helper_method :album_call
   def album_params
     if(params[:album].present?)
-      # (0..params["album"]["pictures_attributes"].count-1).each do |key|
-      #   if(params["album"]["pictures_attributes"][key.to_s]["name"].blank?)
-      #     params["album"]["pictures_attributes"].delete(key.to_s)
-      #   end
-      # end
-      params.require(:album).permit( :name, :description, pictures_attributes:[:album_id,:name, :description,:image ,tags_attributes:[:name]])
+      params.require(:album).permit( :name, :description,:delete, pictures_attributes:[:album_id,:name, :description,:image ,tags_attributes:[:name]])
     else
       return nil  
     end

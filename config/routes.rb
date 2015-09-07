@@ -4,14 +4,15 @@ Rails.application.routes.draw do
   devise_for :users
     
   resources :albums do
-    # put :restore
-  resources :pictures 
+    resources :pictures
   end
   resources :tags 
 
 
   get '/restore/:id'=>'albums#restore', as: 'restore_album'
-
+  # post '/album/:album_id/pictures/destroy_multiple' => 'albums#destroy_multiple', as: 'destroy_multiple_pictures' 
+  post '/album/:album_id/pictures/destroy_multiple' => 'albums#destroy_multiple', as: 'destroy_multiple_pictures' 
+  get '/album/:album_id/pictures/destroy_multiple' => 'albums#destroy_multiple_show', as: 'destroy_multiple_pictures_show' 
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

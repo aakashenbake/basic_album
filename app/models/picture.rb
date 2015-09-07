@@ -11,21 +11,16 @@ class Picture < ActiveRecord::Base
 
     has_attached_file :image, styles: { small: "100x100", med: "200x200", large: "300x300" },:path => ":rails_root/public/images/:id/:filename",:url  => "/images/:id/:filename"
     
-    #validates :image, :presence => true
 
     validates_attachment_content_type :image ,:content_type => ['image/jpeg', 'image/jpg', 'image/png']
     
     before_save :check_blank_and_tags
     private
         def check_blank_and_tags
-            # if (self.name.blank?)
-            #     self.destroy
-            # else
-                tag_list = self.tags[0].name.to_s.split(',')
-                self.tags.destroy_all
-                tag_list.each do |obj|
-                    self.tags.concat(Tag.where(name: obj).first_or_create!)
-                end
-            # end
+            tag_list = self.tags[0].name.to_s.split(',')
+            self.tags.destroy_all
+            tag_list.each do |obj|
+                self.tags.concat(Tag.where(name: obj).first_or_create!)
+            end
         end
 end
