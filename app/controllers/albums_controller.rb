@@ -58,20 +58,7 @@ class AlbumsController < ApplicationController
     Album.only_deleted.restore(params[:id])
     redirect_to albums_path
   end
-
-  def destroy_multiple
-    if params[:picture_ids].present?
-      params[:picture_ids].each do |id|
-        Picture.find(id.to_i).destroy
-      end
-    end
-    redirect_to  edit_album_path(params[:album_id])
-  end
-  # def destroy_multiple_show
-  #   @pictures=Picture.where(:album_id => params[:album_id]).order(:name)
-  #   render 'destroy_multiple'
-  # end
-
+  
 private
   def album_call
     @album = params[:id].present? ? Album.find(params[:id]): current_user.albums.new(album_params)
