@@ -1,15 +1,23 @@
 <div class="col-md-12">
   <%= form_for @album,:role => "form" ,:html => {multipart: true } do |f| %>
-    <p>
-      <%= f.label :name,:class=>"col-md-6"%>
-      <%= f.text_field :name, autofocus: true,:required => "true",:class=>"form-control col-md-6",:placeholder=>"Album Name"%>
-    </p>
-    <p>
-      <%= f.label :description,:class=>"col-md-6"%>
-      <%= f.text_field :description,:required => "true",:class=>"form-control col-md-6",:placeholder=>"Album Description"%>
-    </p>   
+    <div class = "col-md-12">
+      <div class="col-md-2">
+        <%= f.label :name%>
+      </div>
+      <div class="col-md-10">
+        <%= f.text_field :name, autofocus: true,:required => "true",:class=>"form-control ",:placeholder=>"Album Name"%>
+      </div>
+    </div>
+    <div class = "col-md-12">
+      <div class="col-md-2">
+        <%= f.label :description%>
+      </div>
+      <div class="col-md-10">
+        <%= f.text_field :description,:required => "true",:class=>"form-control col-md-6",:placeholder=>"Album Description"%>
+      </div>
+    </div>   
     <div class="col-md-12">
-    <p >Picture</p>
+    <h3>Picture</h3>
     <div class="col-md-12">
       <%6.times do%>
           <%=render 'new_picture', f: f%>
