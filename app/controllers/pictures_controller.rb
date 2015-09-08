@@ -39,7 +39,15 @@ class PicturesController < ApplicationController
   @picture.destroy
   redirect_to album_path(album_id)
  end
-
+ 
+ def destroy_multiple
+   if params[:picture_ids].present?
+     params[:picture_ids].each do |id|
+       Picture.find(id.to_i).destroy
+     end
+   end
+   redirect_to  edit_album_path(params[:album_id])
+ end
  private
  
   def picture_params

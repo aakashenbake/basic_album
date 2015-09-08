@@ -65,12 +65,12 @@ class AlbumsController < ApplicationController
         Picture.find(id.to_i).destroy
       end
     end
-    redirect_to album_path(params[:album_id])
+    redirect_to  edit_album_path(params[:album_id])
   end
-  def destroy_multiple_show
-    @pictures=Picture.where(:album_id => params[:album_id]).order(:name)
-    render 'destroy_multiple'
-  end
+  # def destroy_multiple_show
+  #   @pictures=Picture.where(:album_id => params[:album_id]).order(:name)
+  #   render 'destroy_multiple'
+  # end
 
 private
   def album_call

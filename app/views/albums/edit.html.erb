@@ -1,6 +1,6 @@
 <h1>Editing album</h1>
 <div class="col-md-12">
-    <%= form_for @album,:role => "form",:url => album_path(:id=>@album.id),:html => {multipart: true }, method: :patch do |f| %>
+    <%= form_for @album,:role => "form",:html => {multipart: true }, method: :patch do |f| %>
     <div class="col-md-12">
       <div class="col-md-12">
         <%= f.label :name ,:class=>"col-md-2"%>
@@ -20,11 +20,11 @@
 
   <br>
 
-  <%=render 'picture'%>
+  <%=render 'picture' ,f: f%>
   <div class ="col-md-12">
     <h1>Add A Picture</h1>
     <%=render 'new_picture',f: f%>
-    <%= f.submit :class=>"btn btn-primary"%>
+    <%= f.submit :class=>"btn btn-primary",:formaction=>album_path(:id=>@album.id)%>
     <%= link_to 'Back', albums_path ,:class=>"btn btn-default"%>
   </div>
   <%end%>

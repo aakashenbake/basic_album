@@ -10,9 +10,10 @@ Rails.application.routes.draw do
 
 
   get '/restore/:id'=>'albums#restore', as: 'restore_album'
+
+  patch '/album/:album_id/pictures/destroy_multiple' => 'pictures#destroy_multiple', as: 'destroy_multiple_pictures' 
   # post '/album/:album_id/pictures/destroy_multiple' => 'albums#destroy_multiple', as: 'destroy_multiple_pictures' 
-  post '/album/:album_id/pictures/destroy_multiple' => 'albums#destroy_multiple', as: 'destroy_multiple_pictures' 
-  get '/album/:album_id/pictures/destroy_multiple' => 'albums#destroy_multiple_show', as: 'destroy_multiple_pictures_show' 
+  # get '/album/:album_id/pictures/destroy_multiple' => 'albums#destroy_multiple_show', as: 'destroy_multiple_pictures_show' 
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

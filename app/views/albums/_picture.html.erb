@@ -4,7 +4,8 @@
 				Listing picture
 			</h1>
 			<%if params[:action]=="edit"%>
-				<%= link_to 'Delete Multiple Pictures',destroy_multiple_pictures_show_path(params[:id]),:class=>"btn btn-default"%>
+				<%#= link_to 'Delete Multiple Pictures',destroy_multiple_pictures_show_path(params[:id]),:class=>"btn btn-default"%>
+				<%= f.submit :value=>"Delete Multipal",:class=>"btn btn-danger",:formaction=>destroy_multiple_pictures_path(params[:id])%>
 			<%end%>
 		</div>
 		<div class="col-md-12">
@@ -32,7 +33,8 @@
 			        </div>
 			        <%if params[:action]=="edit"%>
 				        <div class="col-md-12">
-				        	<div class="col-md-12 pull-right"><%= link_to 'Delete', album_picture_path(:id=> picture,:album_id => picture.album),method: :delete,data: { confirm: 'Are you sure?' } %></div>
+				        	<div class="col-md-6"><%=check_box_tag("picture_ids[]",picture.id) %></div>
+			        		<div class="col-md-6">Delete</div>
 				        </div>
 			        <%end%>
 			    </div>
