@@ -8,31 +8,30 @@
 		<%=f.submit :value=>"Delete Selected",:class=>"btn btn-primary"%>
 		<div class ="row">
 			<%@pictures.each do |picture|%>
-			    <div class="col-md-3 thumb ">
+		    	<div class="col-md-3 thumb ">
 			        <%= image_tag((picture.image.url(:med)) ,:size => "200",:class => "img-responsive thumbnail")%>
-			        <div class="col-md-12">
-			          <p class="col-md-6"><strong>Name</strong></p>
-			          <p class="col-md-6"><%= picture.name %></p>   
+		        <div class="col-md-12">
+			        <p class="col-md-6"><strong>Name</strong></p>
+			        <p class="col-md-6"><%= picture.name %></p>   
+		        </div>
+		        <div class="col-md-12">
+			        <p class="col-md-6"><strong>Descreption</strong></p>
+			        <p class="col-md-6"><%= picture.description%></p>   
+		        </div>
+		        <div class="col-md-12">
+			        <p class="col-md-6"><strong>Tags</strong></p>
+			        <p class="col-md-6">
+		          	<%Picture.find(picture.id).tags.each do |obj| %> 
+		          		<%= link_to obj.name.to_s,tag_path(obj.id)%>
+		          	<%end%>	
+			        </p>   
+		        </div>
+		        	<div class="col-md-12">
+		        		<div class="col-md-6"><%=check_box_tag("picture_ids[]",picture.id) %></div>
+			        	<div class="col-md-6">Delete</div>
 			        </div>
-			        <div class="col-md-12">
-			          <p class="col-md-6"><strong>Descreption</strong></p>
-			          <p class="col-md-6"><%= picture.description%></p>   
-			        </div>
-			        <div class="col-md-12">
-			          <p class="col-md-6"><strong>Tags</strong></p>
-			          <p class="col-md-6">
-			          	<%Picture.find(picture.id).tags.each do |obj| %> 
-			          		<%= link_to obj.name.to_s,tag_path(obj.id)%>
-			          	<%end%>	
-			          </p>   
-			        </div>
-				        <div class="col-md-12">
-				        	<div class="col-md-6"><%=check_box_tag("picture_ids[]",picture.id) %></div>
-				        	<div class="col-md-12 pull-right"><%= link_to 'Delete', album_picture_path(:id=> picture,:album_id => picture.album),method: :delete,data: { confirm: 'Are you sure?' } %></div>
-				        </div>
-			        <%end%>
-			    </div>
-		  	<%#end%>
-	   	</div>
-	   	</div>
+		        </div>
+			<%end%>
+	    </div>
+	</div>
 <%end%>
