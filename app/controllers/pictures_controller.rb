@@ -9,6 +9,7 @@ class PicturesController < ApplicationController
  end
  
  def create
+  debugger
   @picture = current_user.pictures.new(picture_params)
   
   @picture.save
@@ -24,6 +25,7 @@ class PicturesController < ApplicationController
  end
  
  def update
+  debugger
   @picture = Picture.find(params[:id])
     if @picture.update(picture_params)
         redirect_to album_pictures_path

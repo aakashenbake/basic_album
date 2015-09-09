@@ -1,0 +1,28 @@
+<%= f.fields_for :pictures, pic ,method: :patch do |p| %>
+  <div class="col-md-3">
+    <div class="col-md-12">
+      <%= p.label :name,:class=>"col-md-4"%>
+      <%= p.text_field :name, :required=>true,:class=>"col-md-8"%>
+    </div>
+    <div class="col-md-12">
+      <%= p.label :description ,:class=>"col-md-4"%>
+      <%= p.text_field :description, :required=>true ,:class=>"col-md-8"%>
+    </div>
+    <div class="col-md-12">  
+      <%=p.fields_for :tags,p.object.tags.new do |t|%>
+          <%=t.label :Tag,:class=>"col-md-4"%>
+          <%= t.text_field :name,:placeholder=>"Picture Tags",:class=>"col-md-8", :value=>Picture.find(pic.id).tags.map(&:name).join(","),:required=>true%>
+        <% end %>
+      </div>
+    <div class="col-md-12">
+      <div class="col-md-4"><%=check_box_tag("picture_ids[]",pic.id) %></div>
+      <div class="col-md-8">Delete</div>
+    </div>    
+   <div class="col-md-12">
+      <%= image_tag((pic.image.url(:med)) ,:size => "200")%>
+   </div>
+   <div class="col-md-12">
+      <%= p.file_field :image ,:class=>"col-md-4"%>
+    </div>
+  </div>
+<%end%>

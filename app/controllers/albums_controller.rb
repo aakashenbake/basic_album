@@ -26,11 +26,11 @@ class AlbumsController < ApplicationController
   end
   
   def update
-   if @album.update(album_params)
+    if @album.update_attributes(album_params)
         redirect_to edit_album_path
-      else
+    else
         render 'edit'
-      end
+    end
   end
 
   def destroy
@@ -67,7 +67,7 @@ private
   helper_method :album_call
   def album_params
     if(params[:album].present?)
-      params.require(:album).permit( :name, :description,:delete, pictures_attributes:[:album_id,:name, :description,:image ,tags_attributes:[:name]])
+      params.require(:album).permit( :name, :description,:delete, pictures_attributes:[:id,:album_id,:name, :description,:image ,tags_attributes:[:id,:name]])
     else
       return nil  
     end
