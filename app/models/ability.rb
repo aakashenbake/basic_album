@@ -28,7 +28,7 @@ class Ability
     # See the wiki for details:
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
       user ||= User.new
-      alias_action :index, :show,:create, :update,:destroy,:restore,:destroy_multiple,:destroy_multiple_show, :to => :crud
+      alias_action :index, :show,:create, :update,:destroy,:restore,:destroy_multiple,:really_destroy, :to => :crud
 
       if(user.roll == "admin") 
         can :manage, :all

@@ -5,13 +5,14 @@ Rails.application.routes.draw do
     
   resources :albums do
     resources :pictures
+    patch '/album/:album_id/pictures/destroy_multiple' => 'pictures#destroy_multiple', as: 'destroy_multiple_pictures' 
   end
+  get '/restore/:id'=>'albums#restore', as: 'restore_album'
+  get '/really_destroy/:id'=>'albums#really_destroy', as: 'really_destroy_album'
   resources :tags 
 
 
-  get '/restore/:id'=>'albums#restore', as: 'restore_album'
 
-  patch '/album/:album_id/pictures/destroy_multiple' => 'pictures#destroy_multiple', as: 'destroy_multiple_pictures' 
   # post '/album/:album_id/pictures/destroy_multiple' => 'albums#destroy_multiple', as: 'destroy_multiple_pictures' 
   # get '/album/:album_id/pictures/destroy_multiple' => 'albums#destroy_multiple_show', as: 'destroy_multiple_pictures_show' 
   

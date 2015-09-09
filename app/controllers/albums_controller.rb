@@ -1,7 +1,8 @@
 class AlbumsController < ApplicationController
-  load_and_authorize_resource :except => :restore
+  
+  load_and_authorize_resource :except => [:restore,:really_destroy]
   before_action :album_call
-  skip_before_action :album_call, only:[:restore,:index] 
+  skip_before_action :album_call, only:[:restore,:index,:really_destroy] 
   def index
     if (current_user.present?)
           album_call
@@ -35,6 +36,13 @@ class AlbumsController < ApplicationController
 
   def destroy
     @album.delete
+    flash[:notice] = "Album has been Recycled"
+    redirect_to albums_path
+  end
+
+  def really_destroy
+    Album.only_deleted.find(params[:id]).really_destroy!
+    flash[:alert] = "Album has been Deleted"
     redirect_to albums_path
   end
   
